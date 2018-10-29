@@ -1,0 +1,18 @@
+{
+  "name": "register_api",
+  "version": "1.0.0",
+  "description": "register user",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "sreehari",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.4",
+    "mysql": "^2.16.0",
+    "promise-mysql": "^3.3.1"
+  }
+}
