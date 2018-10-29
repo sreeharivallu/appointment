@@ -4,7 +4,8 @@
   "description": "register user",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "start": "node app"
   },
   "author": "sreehari",
   "license": "ISC",
