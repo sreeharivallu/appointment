@@ -72,7 +72,7 @@ var listAppointments = function(req,res,next){
     mysql.createConnection(connection_params)
     .then(function(conn){
         connection = conn;        
-        var select_query = `SELECT u.*,a.appointment_date FROM user u JOIN appointments a ON u.id=a.user_id where a.appointment_date LIKE '${appointments_date}%' `;
+        var select_query = `SELECT u.*,a.appointment_date FROM user u JOIN appointments a ON u.id=a.user_id where a.appointment_date LIKE '${appointments_date}%' ORDER BY a.appointment_date`;
             console.log(select_query);
         return connection.query(select_query);
     })
