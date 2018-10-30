@@ -21,13 +21,14 @@ var bookAppointment = function(req,res,next){
     let DOB = req.body.DOB || null;
     let gender = req.body.gender || null;
     let place = req.body.place || null;
-    let date = new Date(req.body.appointment_datetime);
-    let appointment_datetime = date.getFullYear() + '-' +
-    ('00' + (date.getMonth()+1)).slice(-2) + '-' +
-    ('00' + date.getDate()).slice(-2) + ' ' + 
-    ('00' + date.getHours()).slice(-2) + ':' + 
-    ('00' + date.getMinutes()).slice(-2) + ':' + 
-    ('00' + date.getSeconds()).slice(-2);
+    //let date = new Date(req.body.appointment_datetime);
+    // let appointment_datetime = date.getFullYear() + '-' +
+    // ('00' + (date.getMonth()+1)).slice(-2) + '-' +
+    // ('00' + date.getDate()).slice(-2) + ' ' + 
+    // ('00' + date.getHours()).slice(-2) + ':' + 
+    // ('00' + date.getMinutes()).slice(-2) + ':' + 
+    // ('00' + date.getSeconds()).slice(-2);
+    let appointment_datetime = req.body.appointment_datetime;
 console.log(appointment_datetime);
 
     mysql.createConnection(connection_params)
@@ -48,13 +49,14 @@ console.log(appointment_datetime);
     })
     .then(results => {
         console.log('insert result is', results);
-        var select_query = `SELECT * FROM user where phone='${phone}'`;
-        return connection.query(select_query);
-    })    
-    .then(results => {
-        console.log('select result is', results);
-        connection.end();
         return res.send(results);
+        //var select_query = `SELECT * FROM user where phone='${phone}'`;
+        //return connection.query(select_query);
+    // })    
+    // .then(results => {
+    //     console.log('select result is', results);
+    //     connection.end();
+    //     return res.send(results);
     })
     .catch(err => {
         console.log('error is', err);
