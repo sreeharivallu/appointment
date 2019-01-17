@@ -11,15 +11,21 @@ var connection_params = {
 var connection;
 mysql.createConnection(connection_params)
 .then(conn => {
-    connection = conn;
+    connection = conn;    
 });
 
 async function isUserExist(userDetails){
-    let first_name = userDetails.first_name || null;
-    let email = userDetails.email || null;
-    isUserExist_query = `SELECT id, first_name, email, phone FROM user
-                         WHERE email='${email}' AND first_name = '${first_name}' `;   
-    return await connection.query(isUserExist_query);    
+   
+    let isUserExist_query = `SELECT * FROM user`;    
+    let filter = '';
+    
+    Object.entries(userDetails).forEach(([key,value]) => {        
+        filter = filter+ key + `='${value}' AND `;
+    })
+
+    isUserExist_query = isUserExist_query + ' WHERE ' + filter.slice(0, -4);
+    console.log('isUserExist_query is', isUserExist_query);
+    return await connection.query(isUserExist_query);
 }
 
 async function addNewUser(userDetails){
@@ -30,9 +36,11 @@ async function addNewUser(userDetails){
     let DOB = userDetails.DOB || null;
     let gender = userDetails.gender || null;
     let place = userDetails.place || null;
+    let passwd = userDetails.passwd || null;
+    let role = userDetails.role || 'user';
     
-    let insertUser_query =  `INSERT INTO user (first_name, last_name, email, phone, gender, place) 
-        VALUES ('${first_name}', '${last_name}', '${email}', '${phone}','${gender}', '${place}')`;
+    let insertUser_query =  `INSERT INTO user (first_name, last_name, email, phone, gender, place, passwd, role) 
+        VALUES ('${first_name}', '${last_name}', '${email}', '${phone}','${gender}', '${place}', '${passwd}', '${role}')`;
     
     return await connection.query(insertUser_query)   
 }

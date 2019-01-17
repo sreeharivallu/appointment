@@ -4,7 +4,7 @@ var db = require('../helpers/db');
 
 var registerUser = function(req,res,next){
 
-    db.isUserExist(req.body)
+    db.isUserExist({email: req.body.email})
     .then(userData => {
         console.log(userData);
 
